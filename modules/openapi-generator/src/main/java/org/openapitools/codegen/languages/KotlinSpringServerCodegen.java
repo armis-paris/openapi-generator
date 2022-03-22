@@ -59,6 +59,7 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
     public static final String SPRING_BOOT = "spring-boot";
     public static final String EXCEPTION_HANDLER = "exceptionHandler";
     public static final String GRADLE_BUILD_FILE = "gradleBuildFile";
+    public static final String RESPONSE_ENTITY = "responseEntity";
     public static final String SWAGGER_ANNOTATIONS = "swaggerAnnotations";
     public static final String SERVICE_INTERFACE = "serviceInterface";
     public static final String SERVICE_IMPLEMENTATION = "serviceImplementation";
@@ -73,6 +74,7 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
     private String serverPort = "8080";
     private String title = "OpenAPI Kotlin Spring";
     private String resourceFolder = "src/main/resources";
+    private boolean responseEntity = false;
     private boolean useBeanValidation = true;
     private boolean exceptionHandler = true;
     private boolean gradleBuildFile = true;
@@ -143,6 +145,7 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
                 "Useful to help facilitate the generation gap pattern", serviceInterface);
         addSwitch(SERVICE_IMPLEMENTATION, "generate stub service implementations that extends service " +
                 "interfaces. If this is set to true service interfaces will also be generated", serviceImplementation);
+        addSwitch(RESPONSE_ENTITY, "use response entity as response for generated services", responseEntity);
         addSwitch(USE_BEANVALIDATION, "Use BeanValidation API annotations to validate data types", useBeanValidation);
         addSwitch(REACTIVE, "use coroutines for reactive behavior", reactive);
         addSwitch(INTERFACE_ONLY, "Whether to generate only API interface stubs without the server files.", interfaceOnly);
@@ -246,6 +249,14 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
 
     public void setUseTags(boolean useTags) {
         this.useTags = useTags;
+    }
+
+    public boolean getResponseEntity() {
+        return responseEntity;
+    }
+
+    public void setResponseEntity(final boolean responseEntity) {
+        this.responseEntity = responseEntity;
     }
 
     @Override
@@ -357,6 +368,11 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
             this.setServiceInterface(Boolean.parseBoolean(additionalProperties.get(SERVICE_INTERFACE).toString()));
         }
         writePropertyBack(SERVICE_INTERFACE, serviceInterface);
+
+        if (additionalProperties.containsKey(RESPONSE_ENTITY)) {
+            this.setResponseEntity(Boolean.parseBoolean(additionalProperties.get(RESPONSE_ENTITY).toString()));
+        }
+        writePropertyBack(RESPONSE_ENTITY, responseEntity);
 
         if (additionalProperties.containsKey(SERVICE_IMPLEMENTATION)) {
             this.setServiceImplementation(Boolean.parseBoolean(additionalProperties.get(SERVICE_IMPLEMENTATION).toString()));

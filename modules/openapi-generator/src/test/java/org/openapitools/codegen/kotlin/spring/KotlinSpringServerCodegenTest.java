@@ -110,6 +110,8 @@ public class KotlinSpringServerCodegenTest {
         Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.SERVICE_INTERFACE), true);
         Assert.assertTrue(codegen.getServiceImplementation());
         Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.SERVICE_IMPLEMENTATION), true);
+        Assert.assertFalse(codegen.getResponseEntity());
+        Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.RESPONSE_ENTITY), false);
         Assert.assertFalse(codegen.getUseBeanValidation());
         Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.USE_BEANVALIDATION), false);
         Assert.assertFalse(codegen.isReactive());
@@ -156,6 +158,8 @@ public class KotlinSpringServerCodegenTest {
         Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.SERVICE_INTERFACE), true);
         Assert.assertTrue(codegen.getServiceImplementation());
         Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.SERVICE_IMPLEMENTATION), true);
+        Assert.assertFalse(codegen.getResponseEntity());
+        Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.RESPONSE_ENTITY), false);
         Assert.assertFalse(codegen.getUseBeanValidation());
         Assert.assertEquals(codegen.additionalProperties().get(KotlinSpringServerCodegen.USE_BEANVALIDATION), false);
         Assert.assertFalse(codegen.isReactive());

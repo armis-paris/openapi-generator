@@ -50,6 +50,7 @@ class StoreApiController(@Autowired(required = true) val service: StoreApiServic
     suspend fun deleteOrder(@ApiParam(value = "ID of the order that needs to be deleted", required=true) @PathVariable("orderId") orderId: kotlin.String
 ): ResponseEntity<Unit> {
         return ResponseEntity(service.deleteOrder(orderId), HttpStatus.valueOf(400))
+
     }
 
     @ApiOperation(
@@ -68,6 +69,7 @@ class StoreApiController(@Autowired(required = true) val service: StoreApiServic
     )
     suspend fun getInventory(): ResponseEntity<Map<String, kotlin.Int>> {
         return ResponseEntity(service.getInventory(), HttpStatus.valueOf(200))
+
     }
 
     @ApiOperation(
@@ -85,6 +87,7 @@ class StoreApiController(@Autowired(required = true) val service: StoreApiServic
     suspend fun getOrderById(@Min(1L) @Max(5L) @ApiParam(value = "ID of pet that needs to be fetched", required=true) @PathVariable("orderId") orderId: kotlin.Long
 ): ResponseEntity<Order> {
         return ResponseEntity(service.getOrderById(orderId), HttpStatus.valueOf(200))
+
     }
 
     @ApiOperation(
@@ -102,5 +105,6 @@ class StoreApiController(@Autowired(required = true) val service: StoreApiServic
     suspend fun placeOrder(@ApiParam(value = "order placed for purchasing the pet" ,required=true ) @Valid @RequestBody body: Order
 ): ResponseEntity<Order> {
         return ResponseEntity(service.placeOrder(body), HttpStatus.valueOf(200))
+
     }
 }
